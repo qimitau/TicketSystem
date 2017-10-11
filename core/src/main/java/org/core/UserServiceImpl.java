@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 		}
 		finally {
 		em.close();
-		System.out.println("blup");
+//		System.out.println("blup");
 		}
 
 	}
