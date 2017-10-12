@@ -15,6 +15,16 @@ public class Benutzer {
 	private String name; 
 	
 	private String department;
+	
+	private String password;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public String getDepartment() {
 		return department;
