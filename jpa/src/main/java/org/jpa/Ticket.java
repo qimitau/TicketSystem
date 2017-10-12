@@ -1,0 +1,86 @@
+package org.jpa;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+
+@Entity
+public class Ticket {
+	
+	@Id
+	private Long id;
+	
+	@Column(name = "TIMESTAMP_FIELD")
+	private java.sql.Timestamp timestampField;
+	
+	private String status;
+	
+	private String subject;
+	
+	private String text;
+	
+	@ManyToOne
+	private Benutzer benutzer;
+	
+	@ManyToOne
+	private Benutzer admin;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public java.sql.Timestamp getTimestampField() {
+		return timestampField;
+	}
+
+	public void setTimestampField(java.sql.Timestamp timestampField) {
+		this.timestampField = timestampField;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public Benutzer getBenutzer() {
+		return benutzer;
+	}
+
+	public void setBenutzer(Benutzer benutzer) {
+		this.benutzer = benutzer;
+	}
+
+	public Benutzer getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Benutzer admin) {
+		this.admin = admin;
+	}
+
+}
