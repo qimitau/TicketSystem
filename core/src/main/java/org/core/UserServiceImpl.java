@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 import org.jpa.Benutzer;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends AbstractBaseService<Benutzer> implements UserService  {
 
 	private static final long serialVersionUID = 1L;
 	

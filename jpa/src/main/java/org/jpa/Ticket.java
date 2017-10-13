@@ -4,12 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
 
 
 @Entity
 public class Ticket {
 	
 	@Id
+	@GeneratedValue
 	private Long id;
 	
 	@Column(name = "TIMESTAMP_FIELD")
