@@ -21,6 +21,7 @@ public class Ticket {
 	
 	private String subject;
 	
+	@Column(length = 1024)
 	private String text;
 	
 	@ManyToOne

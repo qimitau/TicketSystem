@@ -6,5 +6,13 @@ import org.jpa.Benutzer;
 
 public interface UserService extends Serializable {
 	
-	void insertUser(Benutzer benutzer);
+	public void insert(Benutzer benutzer);
+	
+	public void delete(Benutzer benutzer);
+	
+	public void update(Benutzer benutzer);
+	
+	public Benutzer findById(Long id);
+	
+	public Benutzer findByEmail(String email);
 }

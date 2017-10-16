@@ -16,6 +16,7 @@ public class ServiceUnit {
 	@Column(name = "TIMESTAMP_FIELD")
 	private java.sql.Timestamp timestampField;
 	
+	@Column(length = 1024)
 	private String text;
 	
 	@ManyToOne
