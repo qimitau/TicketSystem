@@ -13,6 +13,8 @@ public interface ServiceUnitService extends Serializable {
 	public void insert(ServiceUnit serviceUnit);
 
 	public void delete(ServiceUnit serviceUnit);
+	
+	public void delete(Long id);
 
 	public void update(ServiceUnit serviceUnit);
 

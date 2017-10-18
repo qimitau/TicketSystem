@@ -11,6 +11,8 @@ import org.jpa.domain.Ticket;
 public interface TicketService extends Serializable {
 	public void insert(Ticket ticket);
 
+	public void delete(Long l);
+	
 	public void delete(Ticket ticket);
 
 	public void update(Ticket ticket);

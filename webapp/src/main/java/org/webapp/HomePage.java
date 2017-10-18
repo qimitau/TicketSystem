@@ -55,9 +55,11 @@ public class HomePage extends WebPage {
 			System.out.println(su.getText());
 		}	
 		
-		ServiceUnit su = serviceUnitService.findById(1L);
-		su.setText("Es gibt heir eine ServiceUnit, wie?");
-		serviceUnitService.update(su);
+//		ServiceUnit su = serviceUnitService.findById(1L);
+//		su.setText("Es gibt heir eine ServiceUnit, wie?");
+//		serviceUnitService.update(su);
+		
+		ticketService.delete(4L);
 
     }
 }
