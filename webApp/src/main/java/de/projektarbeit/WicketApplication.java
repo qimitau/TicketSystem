@@ -1,5 +1,10 @@
 package de.projektarbeit;
 
+import javax.enterprise.inject.spi.BeanManager;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import org.apache.wicket.cdi.CdiConfiguration;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
@@ -28,6 +33,15 @@ public class WicketApplication extends WebApplication
 	{
 		super.init();
 
+	    BeanManager bm;
+	    try {
+	        bm = (BeanManager) new InitialContext().lookup("java:comp/BeanManager");
+	    } catch (NamingException e) {
+	        throw new IllegalStateException("Unable to obtain CDI BeanManager", e);
+	    }
+
+	    // configure wicket/cdi
+	    new CdiConfiguration(bm).configure(this);
 		// add your configuration here
 	}
 }

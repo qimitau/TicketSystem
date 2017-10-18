@@ -2,7 +2,9 @@ package org.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 
@@ -14,7 +16,7 @@ public class Ticket {
 	@GeneratedValue
 	private Long id;
 	
-	@Column(name = "TIMESTAMP_FIELD")
+	@Column(name = "TIMESTAMP_FIELD", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private java.sql.Timestamp timestampField;
 	
 	private String status;
@@ -24,10 +26,12 @@ public class Ticket {
 	@Column(length = 1024)
 	private String text;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="benutzer_id")
 	private Benutzer benutzer;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="admin_id")
 	private Benutzer admin;
 
 	public Long getId() {

@@ -1,11 +1,16 @@
 package org.core;
 
+import java.io.Serializable;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public abstract class AbstractBaseService<T>  {
 
+public abstract class AbstractBaseService<T> implements Serializable  {
+
+	private static final long serialVersionUID = 1L;
+	
 	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
 	EntityManager em = entityManagerFactory.createEntityManager();
 
@@ -17,7 +22,6 @@ public abstract class AbstractBaseService<T>  {
 		} finally {
 			em.close();
 		}
-//		return entity;
 	}
 
 	public void update(T entity) {
@@ -28,7 +32,6 @@ public abstract class AbstractBaseService<T>  {
 		} finally {
 			em.close();
 		}
-//		return entity;
 	}
 
 	public void delete(T entity) {

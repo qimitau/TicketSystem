@@ -1,9 +1,12 @@
 package org.jpa;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Column;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -21,6 +24,30 @@ public class Benutzer {
 	
 	@Column(unique = true)
 	private String email;
+	
+	
+	@OneToMany(mappedBy = "benutzer")
+	  private List<Ticket> tickets;
+	
+	@OneToMany(mappedBy = "admin")
+	  private List<Ticket> ticketsAdmin;
+	
+
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+
+	public List<Ticket> getTicketsAdmin() {
+		return ticketsAdmin;
+	}
+
+	public void setTicketsAdmin(List<Ticket> ticketsAdmin) {
+		this.ticketsAdmin = ticketsAdmin;
+	}
 
 	public String getEmail() {
 		return email;
