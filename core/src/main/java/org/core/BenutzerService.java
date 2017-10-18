@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import org.jpa.Benutzer;
+import org.jpa.domain.Benutzer;
 
 @ApplicationScoped
 public interface BenutzerService extends Serializable {
@@ -19,3 +19,4 @@ public interface BenutzerService extends Serializable {
 	
 	public Benutzer findByEmail(String email);
 }
+

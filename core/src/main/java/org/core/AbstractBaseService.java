@@ -2,17 +2,18 @@ package org.core;
 
 import java.io.Serializable;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
+import org.jpa.jpa.PersistenceManager;
 
+@ApplicationScoped
 public abstract class AbstractBaseService<T> implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
 	
-	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
-	EntityManager em = entityManagerFactory.createEntityManager();
+
+    EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
 
 	public void insert(T entity) {
 		try {

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import org.jpa.Ticket;
+import org.jpa.domain.Ticket;
 
 @ApplicationScoped
 public class TicketServiceImpl extends AbstractBaseService<Ticket> implements TicketService {
@@ -33,14 +33,12 @@ public class TicketServiceImpl extends AbstractBaseService<Ticket> implements Ti
 
 	}
 
-	@Override
 	public Ticket findById(Long id) {
 		Ticket ticket = em.find(Ticket.class, id);
 		return ticket;
 	}
 
 	// @SuppressWarnings("unchecked")
-	@Override
 	public List<Ticket> findAll() {
 		List<Ticket> list;
 		try {
@@ -48,7 +46,7 @@ public class TicketServiceImpl extends AbstractBaseService<Ticket> implements Ti
 			list = em.createQuery("SELECT a FROM Ticket a", Ticket.class).getResultList();
 	
 		} finally {
-			em.close();
+		//	em.close();
 		}
 
 		return list;

@@ -3,7 +3,7 @@ package org.core;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.Query;
 
-import org.jpa.Benutzer;
+import org.jpa.domain.Benutzer;
 
 @ApplicationScoped
 public class BenutzerServiceImpl extends AbstractBaseService<Benutzer> implements BenutzerService {
@@ -15,21 +15,19 @@ public class BenutzerServiceImpl extends AbstractBaseService<Benutzer> implement
 		super.insert(benutzer);
 	}
 
-	@Override
 	public Benutzer findById(Long id) {
 		Benutzer benutzer = em.find(Benutzer.class, id);
 		return benutzer;
 	}
 
-	@Override
 	public Benutzer findByEmail(String email) {
 		Benutzer benutzer = null;
 		try {
-			Query query = em.createQuery("SELECT u FROM Benutzer u WHERE u.email = :email");
+			Query query = em.createQuery("SELECT u FROM org.jpa.domain.Benutzer u WHERE u.email = :email");
 			query.setParameter("email", email);
 			benutzer = (Benutzer) query.getSingleResult();
 		} finally {
-			em.close();
+	//		em.close();
 		}
 		return benutzer;
 	}

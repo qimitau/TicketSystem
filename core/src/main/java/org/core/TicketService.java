@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import org.jpa.Ticket;
+import org.jpa.domain.Ticket;
 
 @ApplicationScoped
 public interface TicketService extends Serializable {
@@ -19,3 +19,4 @@ public interface TicketService extends Serializable {
 
 	public List<Ticket> findAll();
 }
+
