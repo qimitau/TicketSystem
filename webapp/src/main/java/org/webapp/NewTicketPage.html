@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<wicket:extend>
+
+
+		<div class="card col-sm-11 mx-auto border-0">
+		<span wicket:id="label2"></span>
+		<form wicket:id="newTicketForm">
+			<span wicket:id="newTicket"></span> 
+<!-- 			<br />  -->
+<!-- 			<label for="login">Name:</label> -->
+<!-- 			<br />  -->
+<!-- 			<input type="text" class="form-control" wicket:id="name" /> -->
+<!-- 			<br />  -->
+<!-- 			<label for="login">Email:</label>  -->
+<!-- 			<br />  -->
+<!-- 			<input type="text" class="form-control" wicket:id="email" /> -->
+			<br /> 
+			<label for="login">Subject:</label>
+			<br /> 
+			<input type="text" class="form-control" wicket:id="subject" />
+			<br /> 
+			<label for="login">Details:</label>
+			<br /> 
+			<textarea style="height: 300px" class="form-control" wicket:id="details" ></textarea>
+			<br />
+			<input type="submit" class="btn btn-primary w-100" value="Submit" wicket:id="sendButton"/>
+		</form>
+		</div>
+
+	</wicket:extend>
+</body>
+</html>

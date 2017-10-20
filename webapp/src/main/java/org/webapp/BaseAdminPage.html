@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html class="h-100">
+<head>
+<title>Ticket System Mini</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+	crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+<body class="h-100">
+	<div id="header">
+		<div align="center" class="d-none d-sm-block">
+			<img
+				src="https://www.dingthebook.com/wp-content/uploads/2017/10/240_F_27569335_WJYeW3LyOZElmkJ1H9EvNrMhfh8M2VfP.jpg">
+		</div>
+	</div>
+	<div id="body">
+		<div>
+			<wicket:child />
+		</div>
+	</div>
+	<div id="footer">
+	<form wicket:id="logOutForm">
+		<input type="submit" class="btn btn-secondary" value="Log Out" wicket:id="logOutButton"/>
+		</form>
+	</div>
+</body>
+</html>

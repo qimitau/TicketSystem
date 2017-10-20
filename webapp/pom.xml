@@ -69,7 +69,7 @@
 			<scope>test</scope>
 			<version>${jetty9.version}</version>
 		</dependency>
-		<dependency>
+		<dependency> 
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-jmx</artifactId>
 			<version>${jetty9.version}</version>
@@ -77,13 +77,22 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-cdi -->
-<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-cdi -->
+		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-cdi -->
 		<dependency>
-		    <groupId>org.apache.wicket</groupId>
-		    <artifactId>wicket-cdi</artifactId>
-		    <version>${wicket.version}</version>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-cdi</artifactId>
+			<version>${wicket.version}</version>
 		</dependency>
-
+<!-- 		<dependency>  -->
+<!-- 			<groupId>org.apache.wicket</groupId> -->
+<!-- 			<artifactId>wicket-examples</artifactId> -->
+<!-- 			<version>${wicket.version}</version> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-auth-roles</artifactId>
+			<version>${wicket.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>de.projektarbeit</groupId>
@@ -95,6 +104,9 @@
 			<artifactId>jpa</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
+
+		
 	</dependencies>
 	<build>
 		<resources>
@@ -175,5 +187,14 @@
 			<snapshots>
 			</snapshots>
 		</repository>
+<!-- 				<repository> -->
+<!-- 			<id>Apache Nexus</id> -->
+<!-- 			<url>https://mvnrepository.com/artifact/org.apache.wicket/wicket-examples/</url> -->
+<!-- 			<releases> -->
+<!-- 				<enabled>false</enabled> -->
+<!-- 			</releases> -->
+<!-- 			<snapshots> -->
+<!-- 			</snapshots> -->
+<!-- 		</repository>  -->
 	</repositories>
 </project>
