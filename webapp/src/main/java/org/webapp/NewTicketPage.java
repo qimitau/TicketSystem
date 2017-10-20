@@ -23,7 +23,7 @@ public class NewTicketPage extends BaseAdminPage {
 	private String name;
 	private String subject;
 	private String details;
-	Benutzer benutzer;
+	private Benutzer benutzer;
 
 	public NewTicketPage(Benutzer benutzer) {
 		this.benutzer = benutzer;
@@ -55,7 +55,7 @@ public class NewTicketPage extends BaseAdminPage {
 				ticket.setBenutzer(benutzer);
 				ticket.setAdmin(benutzerService.findById(1L));
 				ticketService.insert(ticket);
-				SuccessPage successPage = new SuccessPage();
+				SuccessPage successPage = new SuccessPage(benutzer);
 				setResponsePage(successPage);
 
 			}
