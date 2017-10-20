@@ -18,9 +18,6 @@ public class LoginPage extends BasePage {
 	private String password;
 
 	public LoginPage() {
-		try {
-		 add(new Label("label1", ""));
-
 		Form<Void> loginForm = new Form<Void>("loginForm");
 		add(loginForm);
 
@@ -63,10 +60,5 @@ public class LoginPage extends BasePage {
 
 		};
 		loginForm.add(okButton);
-	}
-		catch(Exception e) {
-			e.printStackTrace();
-			 add(new Label("label1", "Shit happens"));
-		}
 	}
 }

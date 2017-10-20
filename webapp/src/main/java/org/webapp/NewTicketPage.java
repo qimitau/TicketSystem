@@ -27,7 +27,7 @@ public class NewTicketPage extends BaseAdminPage {
 
 	public NewTicketPage(Benutzer benutzer) {
 		this.benutzer = benutzer;
-		add(new Label("label2", ""));
+
 		// TextField<String> nameField = new TextField<String>("name", new
 		// PropertyModel<String>(this, "name"));
 		// add(nameField);
@@ -47,7 +47,7 @@ public class NewTicketPage extends BaseAdminPage {
 		Button sendButton = new Button("sendButton") {
 			@Override
 			public void onSubmit() {
-				try {
+
 				Ticket ticket = new Ticket();
 				ticket.setStatus("open");
 				ticket.setSubject(subject);
@@ -55,11 +55,9 @@ public class NewTicketPage extends BaseAdminPage {
 				ticket.setBenutzer(benutzer);
 				ticket.setAdmin(benutzerService.findById(1L));
 				ticketService.insert(ticket);
-				}
-				catch(Exception e) {
-					e.printStackTrace();
-					add(new Label("label2", "Shit happens!"));
-				}
+				SuccessPage successPage = new SuccessPage();
+				setResponsePage(successPage);
+
 			}
 		};
 		newTicketForm.add(sendButton);
