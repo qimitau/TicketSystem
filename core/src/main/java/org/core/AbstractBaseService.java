@@ -21,7 +21,7 @@ public abstract class AbstractBaseService<T> implements Serializable  {
 			em.persist(entity);
 			em.getTransaction().commit();
 		} finally {
-			em.close();
+			//em.close();
 		}
 	}
 
@@ -31,7 +31,7 @@ public abstract class AbstractBaseService<T> implements Serializable  {
 			em.merge(entity);
 			em.getTransaction().commit();
 		} finally {
-			em.close();
+			//em.close();
 		}
 	}
 
@@ -41,7 +41,7 @@ public abstract class AbstractBaseService<T> implements Serializable  {
 			em.remove(entity);
 			em.getTransaction().commit();
 		} finally {
-			em.close();
+			//em.close();
 		}
 	}
 }
