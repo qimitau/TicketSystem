@@ -15,12 +15,11 @@ import org.jpa.domain.Ticket;
 
 public class NewTicketPage extends BaseAdminPage {
 
+	private static final long serialVersionUID = 1L;
 	@Inject
 	TicketService ticketService;
 	@Inject
 	BenutzerService benutzerService;
-	private String email;
-	private String name;
 	private String subject;
 	private String details;
 	private Benutzer benutzer;
@@ -28,13 +27,6 @@ public class NewTicketPage extends BaseAdminPage {
 	public NewTicketPage(Benutzer benutzer) {
 		this.benutzer = benutzer;
 
-		// TextField<String> nameField = new TextField<String>("name", new
-		// PropertyModel<String>(this, "name"));
-		// add(nameField);
-		//
-		// TextField<String> emailField = new TextField<String>("email", new
-		// PropertyModel<String>(this, "email"));
-		// add(emailField);
 		Form<Void> newTicketForm = new Form<Void>("newTicketForm");
 		add(newTicketForm);
 		newTicketForm.add(new Label("newTicket", "Create new Ticket:"));
@@ -47,19 +39,30 @@ public class NewTicketPage extends BaseAdminPage {
 		Button sendButton = new Button("sendButton") {
 			@Override
 			public void onSubmit() {
-
-				Ticket ticket = new Ticket();
-				ticket.setStatus("open");
-				ticket.setSubject(subject);
-				ticket.setText(details);
-				ticket.setBenutzer(benutzer);
-				ticket.setAdmin(benutzerService.findById(1L));
-				ticketService.insert(ticket);
-				SuccessPage successPage = new SuccessPage(benutzer);
-				setResponsePage(successPage);
-
+				System.out.println(subject);
+				System.out.println(details);
+				addNewTicket(benutzer, subject, details);
 			}
 		};
 		newTicketForm.add(sendButton);
+	}
+
+	private void addNewTicket(Benutzer benutzer, String subject, String details) {
+		try {
+			System.out.println(subject);
+			System.out.println(details);
+			Ticket ticket = new Ticket();
+			ticket.setStatus("open");
+			ticket.setSubject(subject);
+			ticket.setText(details);
+			ticket.setBenutzer(benutzer);
+			ticket.setAdmin(benutzerService.findById(1L));
+			ticketService.insert(ticket);
+			SuccessPage successPage = new SuccessPage(benutzer);
+			setResponsePage(successPage);
+		} catch (Exception e) {
+			ErrorPage errorPage = new ErrorPage(benutzer);
+			setResponsePage(errorPage);
+		}
 	}
 }

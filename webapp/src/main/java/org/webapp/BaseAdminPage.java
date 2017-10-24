@@ -5,6 +5,7 @@ import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 
 public abstract class BaseAdminPage extends WebPage {
+	private static final long serialVersionUID = 1L;
 
 	public BaseAdminPage() {
 		super();
@@ -15,6 +16,7 @@ public abstract class BaseAdminPage extends WebPage {
 
 			@Override
 			public void onSubmit() {
+				getSession().invalidate();
 				setResponsePage(new LoginPage());
 			}
 

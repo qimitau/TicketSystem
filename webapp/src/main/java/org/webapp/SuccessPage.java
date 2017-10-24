@@ -7,7 +7,7 @@ import org.jpa.domain.Benutzer;
 
 public class SuccessPage extends BaseAdminPage {
 	
-	private Benutzer benutzer;
+	//private Benutzer benutzer;
 
 	public SuccessPage(Benutzer benutzer) {
 		super();

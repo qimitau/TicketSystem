@@ -3,6 +3,8 @@ package org.core;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import org.jpa.domain.Ticket;
 
@@ -14,7 +16,6 @@ public class TicketServiceImpl extends AbstractBaseService<Ticket> implements Ti
 	@Override
 	public void insert(Ticket ticket) {
 		super.insert(ticket);
-
 	}
 
 	@Override
@@ -32,7 +33,6 @@ public class TicketServiceImpl extends AbstractBaseService<Ticket> implements Ti
 		super.update(ticket);
 
 	}
-
 	public Ticket findById(Long id) {
 		Ticket ticket = em.find(Ticket.class, id);
 		return ticket;
