@@ -8,20 +8,25 @@ import javax.persistence.EntityManager;
 import org.jpa.jpa.PersistenceManager;
 
 @ApplicationScoped
-public abstract class AbstractBaseService<T> implements Serializable  {
+public abstract class AbstractBaseService<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
 
-    EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+	EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
 
 	public void insert(T entity) {
 		try {
 			em.getTransaction().begin();
 			em.persist(entity);
 			em.getTransaction().commit();
-		} finally {
-			//em.close();
+		} 
+//		catch (Exception e) {
+//			em.getTransaction().rollback();
+//			em.refresh(entity);
+//		} 
+		finally {
+			// em.close();
+
 		}
 	}
 
@@ -31,7 +36,7 @@ public abstract class AbstractBaseService<T> implements Serializable  {
 			em.merge(entity);
 			em.getTransaction().commit();
 		} finally {
-			//em.close();
+			// em.close();
 		}
 	}
 
@@ -41,7 +46,7 @@ public abstract class AbstractBaseService<T> implements Serializable  {
 			em.remove(entity);
 			em.getTransaction().commit();
 		} finally {
-			//em.close();
+			// em.close();
 		}
 	}
 }
