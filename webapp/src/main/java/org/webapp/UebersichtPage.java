@@ -12,6 +12,7 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
 import org.apache.wicket.model.IModel;
 import org.core.TicketService;
+import org.jpa.domain.Benutzer;
 import org.jpa.domain.Ticket;
 
 public class UebersichtPage extends BaseAdminPage {
@@ -20,9 +21,11 @@ public class UebersichtPage extends BaseAdminPage {
 	@Inject
 	TicketService ticketService;
 	private Ticket selected;
+	private Benutzer benutzer;
 
-	public UebersichtPage() {
+	public UebersichtPage(Benutzer benutzer) {
 		super();
+		this.benutzer = benutzer;
 
 		List<Ticket> tickets = ticketService.findAll();
 
@@ -52,7 +55,7 @@ public class UebersichtPage extends BaseAdminPage {
 				@Override
 				public void onClick() {
 					selected = (Ticket) getParent().getDefaultModelObject();
-					setResponsePage(new NewServiceUnitPage(selected));
+					setResponsePage(new NewServiceUnitPage(selected, benutzer));
 				}
 			});
 		}

@@ -216,7 +216,7 @@ public class MySignInPanel extends Panel
 //		setResponsePage(getApplication().getHomePage());
 		String department = benutzerService.findByEmail(username).getDepartment();
 		if (department.equals("IT")) {
-			setResponsePage(new UebersichtPage());
+			setResponsePage(new UebersichtPage(benutzerService.findByEmail(username)));
 		} else {
 			setResponsePage(new NewTicketPage(benutzerService.findByEmail(username)));
 		}

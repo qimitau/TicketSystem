@@ -105,7 +105,7 @@ public class NewTicketPage extends BaseAdminPage {
 	private void cancelButtonRedirect(Benutzer benutzer) {
 		String dep = benutzer.getDepartment();
 		if (dep.equals("IT")) {
-			setResponsePage(new UebersichtPage());
+			setResponsePage(new UebersichtPage(benutzer));
 		} else {
 			setResponsePage(new NewTicketPage(benutzer));
 		}

@@ -6,12 +6,56 @@
 <body>
 	<wicket:extend>
 		<div class="card col-sm-11 mx-auto border-0">
-		<p class="breadcrumb">
-			<wicket:link>
-				<a class="breadcrumb-item" href="UebersichtPage.html">Tickets</a>
-				<a class="breadcrumb-item" href="NewTicketPage.html">New Ticket</a>
-			</wicket:link>
-		</p>
+			<p class="breadcrumb">
+				<wicket:link>
+					<a class="breadcrumb-item" href="UebersichtPage.html">Tickets</a>
+					<a class="breadcrumb-item" href="NewTicketPage.html">New Ticket</a>
+				</wicket:link>
+			</p>
+		</div>
+		<div class="card col-sm-11 mx-auto border-0" style="max-height: 5500px; overflow-y: auto;">
+			<form wicket:id="newSUForm">
+				<b>
+				<span>Create new Service Unit</span>
+				<span wicket:id="label1"></span>
+				</b>
+				<br />
+				<span class="card p-2 w-75" wicket:id="label2"></span>
+				<input type="submit" class="btn btn-primary mt-2" value="Assign Ticket to me" wicket:id="assignButton" /> 
+				<br />  <br />
+				<label for="login">Details:</label>
+				<br />
+				<textarea style="height: 200px" class="form-control w-75" wicket:id="details"></textarea> 
+				<br />
+				<label for="login">Set Ticket status:</label>
+			 <wicket:container wicket:id="group">
+  					  <label class="p-1"><input wicket:id="open" type="radio" name="statusSU"/>&nbsp;Open</label>
+  					  <label class="p-1"><input wicket:id="inProgress" type="radio" name="statusSU"/>&nbsp;In progress</label>
+   					<label class="p-1"><input wicket:id="done" type="radio" name="statusSU"/>&nbsp;Done</label>
+ 				 </wicket:container>
+ 				 <br />
+ 				 <input type="submit" class="btn btn-primary mt-2" value="Save Service Unit" wicket:id="saveButton" />
+			</form>
+		</div>
+		<br />
+		<div class="card col-sm-11 mx-auto border-0"
+			style="max-height: 300px; overflow-y: auto;">
+
+			<table class="w-100 table table-striped">
+				<tbody>
+					<tr>
+						<th>ServiceUnit ID</th>
+						<th>Details</th>
+						<th>Create time</th>
+					</tr>
+					<tr wicket:id="serviceUnitList">
+						<td wicket:id="serviceUnitId"></td>
+						<td wicket:id="serviceUnitText"></td>
+						<td wicket:id="ServiceUnitTime"></td>
+					</tr>
+				</tbody>
+			</table>
+
 		</div>
 
 	</wicket:extend>
