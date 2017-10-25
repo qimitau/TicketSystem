@@ -4,9 +4,44 @@
 </head>
 <body>
 	<wicket:extend>
+		<div class="card col-sm-11 mx-auto border-0">
+			<p class="breadcrumb">
+				<wicket:link>
+					<a class="breadcrumb-item" href="UebersichtPage.html">Tickets</a>
+					<a class="breadcrumb-item" href="NewTicketPage.html">New Ticket</a>
+				</wicket:link>
+			</p>
+		</div>
+		<div class="card col-sm-11 mx-auto border-0"
+			style="max-height: 650px; overflow-y: auto;">
 
-		<span wicket:id="label1"></span>
+			<table class="w-100 table table-striped">
+				<tbody>
+					<tr>
+						<th>Ticket ID</th>
+						<th>Status</th>
+						<th>Subject</th>
+						<th>Details</th>
+						<th>Create time</th>
+						<th>User</th>
+						<th>Administrator</th>
+						<th></th>
+					</tr>
+					<tr wicket:id="ticketsList">
+						<td wicket:id="ticketId"></td>
+						<td wicket:id="ticketStatus"></td>
+						<td wicket:id="ticketSubject"></td>
+						<td wicket:id="ticketText"></td>
+						<td wicket:id="ticketTime"></td>
+						<td wicket:id="ticketUser"></td>
+						<td wicket:id="ticketAdmin"></td>
+						<td wicket:id="selectedLabel"></td>
+					</tr>
+				</tbody>
+			</table>
 
+
+		</div>
 	</wicket:extend>
 </body>
 </html>

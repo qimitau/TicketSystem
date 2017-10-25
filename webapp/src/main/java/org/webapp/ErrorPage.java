@@ -30,8 +30,7 @@ public class ErrorPage extends BaseAdminPage {
 	}
 
 	private void addNewTicket() {
-		NewTicketPage newTicketPage = new NewTicketPage(benutzer);
-		setResponsePage(newTicketPage);
+		setResponsePage(new NewTicketPage(benutzer));
 	}
 
 }

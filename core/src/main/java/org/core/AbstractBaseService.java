@@ -20,10 +20,6 @@ public abstract class AbstractBaseService<T> implements Serializable {
 			em.persist(entity);
 			em.getTransaction().commit();
 		} 
-//		catch (Exception e) {
-//			em.getTransaction().rollback();
-//			em.refresh(entity);
-//		} 
 		finally {
 			// em.close();
 

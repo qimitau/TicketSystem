@@ -22,8 +22,7 @@ public class SuccessPage extends BaseAdminPage {
 
 			@Override
 			public void onSubmit() {
-				NewTicketPage newTicketPage = new NewTicketPage(benutzer);
-				setResponsePage(newTicketPage);
+				setResponsePage(new NewTicketPage(benutzer));
 			}
 
 		};
