@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Button;
+import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
@@ -52,7 +54,18 @@ public class UebersichtPage extends BaseAdminPage {
 			}
 		};
 		add(ticketsList);
-		
+
+		Form<Void> refreshForm = new Form<Void>("refreshForm");
+		add(refreshForm);
+		Button refreshButton = new Button("refreshButton") {
+
+			@Override
+			public void onSubmit() {
+				setResponsePage(new UebersichtPage(benutzer));
+			}
+		};
+		refreshForm.add(refreshButton);
+
 	}
 
 	class ActionPanel extends Panel {

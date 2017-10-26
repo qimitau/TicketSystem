@@ -22,6 +22,7 @@ public abstract class BaseAdminPage extends WebPage {
 
 		};
 		logOutForm.add(logOutButton);
+
 	}
 
 }

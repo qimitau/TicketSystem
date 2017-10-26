@@ -7,14 +7,17 @@
 		<div class="card col-sm-11 mx-auto border-0">
 			<p class="breadcrumb">
 				<wicket:link>
-<!-- 					<a class="breadcrumb-item" href="UebersichtPage.html">Tickets</a> -->
+					<!-- 					<a class="breadcrumb-item" href="UebersichtPage.html">Tickets</a> -->
 					<a class="breadcrumb-item" href="NewTicketPage.html">New Ticket</a>
 				</wicket:link>
 			</p>
 		</div>
 		<div class="card col-sm-11 mx-auto border-0"
 			style="max-height: 650px; overflow-y: auto;">
-
+			<form wicket:id="refreshForm">
+				<input type="submit" class="btn btn-secondary mb-2" value="Refresh"
+					wicket:id="refreshButton" />
+			</form>
 			<table class="w-100 table table-striped">
 				<tbody>
 					<tr>
@@ -40,8 +43,8 @@
 				</tbody>
 			</table>
 
-
 		</div>
+
 	</wicket:extend>
 </body>
 </html>
