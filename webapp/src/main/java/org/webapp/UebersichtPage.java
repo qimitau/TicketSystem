@@ -45,6 +45,7 @@ public class UebersichtPage extends BaseAdminPage {
 			}
 		};
 		add(ticketsList);
+		
 	}
 
 	class ActionPanel extends Panel {

@@ -54,7 +54,7 @@ public class NewServiceUnitPage extends BaseAdminPage {
 			protected void populateItem(Item item) {
 				item.add(new Label("serviceUnitId", ((ServiceUnit) item.getModelObject()).getId()));
 				item.add(new Label("serviceUnitText", ((ServiceUnit) item.getModelObject()).getText()));
-				item.add(new Label("ServiceUnitTime", ((ServiceUnit) item.getModelObject()).getTimestampField().toString()));
+//				item.add(new Label("ServiceUnitTime", ((ServiceUnit) item.getModelObject()).getTimestampField().toString()));
 			}
 		};
 		add(serviceUnitList);
@@ -110,5 +110,6 @@ public class NewServiceUnitPage extends BaseAdminPage {
 		serviceUnitService.insert(serviceUnit);
 		ticket.setStatus(selected.getObject());
 		ticketService.update(ticket);
+		setResponsePage(new NewServiceUnitPage(ticket, benutzer));
 	}
 }
