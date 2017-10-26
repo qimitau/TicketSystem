@@ -1,6 +1,7 @@
 package org.core;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.jpa.domain.Benutzer;
@@ -26,7 +27,11 @@ public class BenutzerServiceImpl extends AbstractBaseService<Benutzer> implement
 			Query query = em.createQuery("SELECT u FROM org.jpa.domain.Benutzer u WHERE u.email = :email");
 			query.setParameter("email", email);
 			benutzer = (Benutzer) query.getSingleResult();
-		} finally {
+		} catch(NoResultException e) {
+			e.printStackTrace();
+			return null;
+		}		
+		finally {
 	//		em.close();
 		}
 		return benutzer;

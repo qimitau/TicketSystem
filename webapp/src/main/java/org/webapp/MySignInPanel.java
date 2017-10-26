@@ -1,6 +1,5 @@
 package org.webapp;
 
-
 import javax.inject.Inject;
 
 import org.apache.wicket.RestartResponseException;
@@ -16,10 +15,9 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.core.BenutzerService;
+import org.jpa.domain.Benutzer;
 
-
-public class MySignInPanel extends Panel
-{
+public class MySignInPanel extends Panel {
 	private static final long serialVersionUID = 1L;
 	@Inject
 	BenutzerService benutzerService;
@@ -41,8 +39,7 @@ public class MySignInPanel extends Panel
 	/**
 	 * @see org.apache.wicket.Component#Component(String)
 	 */
-	public MySignInPanel(final String id)
-	{
+	public MySignInPanel(final String id) {
 		this(id, true);
 	}
 
@@ -53,8 +50,7 @@ public class MySignInPanel extends Panel
 	 *            True if form should include a remember-me checkbox
 	 * @see org.apache.wicket.Component#Component(String)
 	 */
-	public MySignInPanel(final String id, final boolean includeRememberMe)
-	{
+	public MySignInPanel(final String id, final boolean includeRememberMe) {
 		super(id);
 
 		this.includeRememberMe = includeRememberMe;
@@ -71,9 +67,8 @@ public class MySignInPanel extends Panel
 	 * 
 	 * @return signin form
 	 */
-	protected MySignInForm getForm()
-	{
-		return (MySignInForm)get(SIGN_IN_FORM);
+	protected MySignInForm getForm() {
+		return (MySignInForm) get(SIGN_IN_FORM);
 	}
 
 	/**
@@ -82,28 +77,22 @@ public class MySignInPanel extends Panel
 	 * @see #setRememberMe(boolean)
 	 */
 	@Override
-	protected void onConfigure()
-	{
+	protected void onConfigure() {
 		// logged in already?
-		if (isSignedIn() == false)
-		{
+		if (isSignedIn() == false) {
 			IAuthenticationStrategy authenticationStrategy = getApplication().getSecuritySettings()
-				.getAuthenticationStrategy();
+					.getAuthenticationStrategy();
 			// get username and password from persistence store
 			String[] data = authenticationStrategy.load();
 
-			if ((data != null) && (data.length > 1))
-			{
+			if ((data != null) && (data.length > 1)) {
 				// try to sign in the user
-				if (signIn(data[0], data[1]))
-				{
+				if (signIn(data[0], data[1])) {
 					username = data[0];
 					password = data[1];
 
 					onSignInRemembered();
-				}
-				else
-				{
+				} else {
 					// the loaded credentials are wrong. erase them.
 					authenticationStrategy.remove();
 				}
@@ -118,8 +107,7 @@ public class MySignInPanel extends Panel
 	 * 
 	 * @return The password
 	 */
-	public String getPassword()
-	{
+	public String getPassword() {
 		return password;
 	}
 
@@ -128,8 +116,7 @@ public class MySignInPanel extends Panel
 	 * 
 	 * @param password
 	 */
-	public void setPassword(final String password)
-	{
+	public void setPassword(final String password) {
 		this.password = password;
 	}
 
@@ -138,8 +125,7 @@ public class MySignInPanel extends Panel
 	 * 
 	 * @return The user name
 	 */
-	public String getUsername()
-	{
+	public String getUsername() {
 		return username;
 	}
 
@@ -148,8 +134,7 @@ public class MySignInPanel extends Panel
 	 * 
 	 * @param username
 	 */
-	public void setUsername(final String username)
-	{
+	public void setUsername(final String username) {
 		this.username = username;
 	}
 
@@ -158,18 +143,16 @@ public class MySignInPanel extends Panel
 	 * 
 	 * @return True if user should be remembered in the future
 	 */
-	public boolean getRememberMe()
-	{
+	public boolean getRememberMe() {
 		return rememberMe;
 	}
 
 	/**
 	 * @param rememberMe
-	 *            If true, rememberMe will be enabled (username and password will be persisted
-	 *            somewhere)
+	 *            If true, rememberMe will be enabled (username and password will be
+	 *            persisted somewhere)
 	 */
-	public void setRememberMe(final boolean rememberMe)
-	{
+	public void setRememberMe(final boolean rememberMe) {
 		this.rememberMe = rememberMe;
 	}
 
@@ -182,24 +165,21 @@ public class MySignInPanel extends Panel
 	 *            The password
 	 * @return True if signin was successful
 	 */
-	private boolean signIn(String username, String password)
-	{
+	private boolean signIn(String username, String password) {
 		return AuthenticatedWebSession.get().signIn(username, password);
 	}
 
 	/**
 	 * @return true, if signed in
 	 */
-	private boolean isSignedIn()
-	{
+	private boolean isSignedIn() {
 		return AuthenticatedWebSession.get().isSignedIn();
 	}
 
 	/**
 	 * Called when sign in failed
 	 */
-	protected void onSignInFailed()
-	{
+	protected void onSignInFailed() {
 		// Try the component based localizer first. If not found try the
 		// application localizer. Else use the default
 		error(getLocalizer().getString("signInFailed", this, "Sign in failed"));
@@ -208,33 +188,36 @@ public class MySignInPanel extends Panel
 	/**
 	 * Called when sign in was successful
 	 */
-	protected void onSignInSucceeded()
-	{
-		// If login has been called because the user was not yet logged in, than continue to the
+	protected void onSignInSucceeded() {
+		// If login has been called because the user was not yet logged in, than
+		// continue to the
 		// original destination, otherwise to the Home page
-//		continueToOriginalDestination();
-//		setResponsePage(getApplication().getHomePage());
-		String department = benutzerService.findByEmail(username).getDepartment();
-		if (department.equals("IT")) {
-			setResponsePage(new UebersichtPage(benutzerService.findByEmail(username)));
-		} else {
-			setResponsePage(new NewTicketPage(benutzerService.findByEmail(username)));
+		// continueToOriginalDestination();
+		// setResponsePage(getApplication().getHomePage());
+		if (benutzerService.findByEmail(username) != null) {
+
+			String department = benutzerService.findByEmail(username).getDepartment();
+			if (department.equals("IT")) {
+				setResponsePage(new UebersichtPage(benutzerService.findByEmail(username)));
+			} else {
+				setResponsePage(new NewTicketPage(benutzerService.findByEmail(username)));
+			}
 		}
 	}
 
 	/**
 	 * Called when sign-in was remembered.
 	 * <p>
-	 * By default tries to continue to the original destination or switches to the application's
-	 * home page.
+	 * By default tries to continue to the original destination or switches to the
+	 * application's home page.
 	 * <p>
 	 * Note: This method will be called during rendering of this panel, thus a
-	 * {@link RestartResponseException} has to be used to switch to a different page.
+	 * {@link RestartResponseException} has to be used to switch to a different
+	 * page.
 	 * 
 	 * @see #onConfigure()
 	 */
-	protected void onSignInRemembered()
-	{
+	protected void onSignInRemembered() {
 		// logon successful. Continue to the original destination
 		continueToOriginalDestination();
 
@@ -245,8 +228,7 @@ public class MySignInPanel extends Panel
 	/**
 	 * Sign in form.
 	 */
-	public final class MySignInForm extends StatelessForm<MySignInPanel>
-	{
+	public final class MySignInForm extends StatelessForm<MySignInPanel> {
 		private static final long serialVersionUID = 1L;
 
 		/**
@@ -255,8 +237,7 @@ public class MySignInPanel extends Panel
 		 * @param id
 		 *            id of the form component
 		 */
-		public MySignInForm(final String id)
-		{
+		public MySignInForm(final String id) {
 			super(id);
 
 			setModel(new CompoundPropertyModel<>(MySignInPanel.this));
@@ -280,26 +261,18 @@ public class MySignInPanel extends Panel
 		 * @see org.apache.wicket.markup.html.form.Form#onSubmit()
 		 */
 		@Override
-		public final void onSubmit()
-		{
-			IAuthenticationStrategy strategy = getApplication().getSecuritySettings()
-				.getAuthenticationStrategy();
+		public final void onSubmit() {
+			IAuthenticationStrategy strategy = getApplication().getSecuritySettings().getAuthenticationStrategy();
 
-			if (signIn(getUsername(), getPassword()))
-			{
-				if (rememberMe == true)
-				{
+			if (signIn(getUsername(), getPassword())) {
+				if (rememberMe == true) {
 					strategy.save(username, password);
-				}
-				else
-				{
+				} else {
 					strategy.remove();
 				}
 
 				onSignInSucceeded();
-			}
-			else
-			{
+			} else {
 				onSignInFailed();
 				strategy.remove();
 			}

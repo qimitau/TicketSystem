@@ -29,6 +29,7 @@ public class NewServiceUnitPage extends BaseAdminPage {
 	private String details;
 	private Ticket ticket;
 	private Benutzer benutzer;
+	IModel<String> selected;
 
 	@Inject
 	ServiceUnitService serviceUnitService;
@@ -53,8 +54,7 @@ public class NewServiceUnitPage extends BaseAdminPage {
 			protected void populateItem(Item item) {
 				item.add(new Label("serviceUnitId", ((ServiceUnit) item.getModelObject()).getId()));
 				item.add(new Label("serviceUnitText", ((ServiceUnit) item.getModelObject()).getText()));
-				item.add(new Label("ServiceUnitTime",
-						((ServiceUnit) item.getModelObject()).getTimestampField().toString()));
+				item.add(new Label("ServiceUnitTime", ((ServiceUnit) item.getModelObject()).getTimestampField().toString()));
 			}
 		};
 		add(serviceUnitList);
@@ -70,7 +70,7 @@ public class NewServiceUnitPage extends BaseAdminPage {
 		Button assignButton = new Button("assignButton") {
 			@Override
 			public void onSubmit() {
-				assgnTicket();
+				assignTicket();
 			}
 		};
 		newSUForm.add(assignButton);
@@ -78,12 +78,20 @@ public class NewServiceUnitPage extends BaseAdminPage {
 		Button saveButton = new Button("saveButton") {
 			@Override
 			public void onSubmit() {
-
+				saveServiceUnit();
 			}
 		};
 		newSUForm.add(saveButton);
+		
+		Button cancelButton = new Button("cancelButton") {
+			@Override
+			public void onSubmit() {
+				setResponsePage(new UebersichtPage(benutzer));
+			}
+		};
+		newSUForm.add(cancelButton);
 
-		IModel<String> selected = new Model<String>();
+		selected = new Model<String>();
 		RadioGroup group = new RadioGroup("group", selected);
 		newSUForm.add(group);
 		group.add(new Radio("open", new Model<String>("Open")));
@@ -91,7 +99,16 @@ public class NewServiceUnitPage extends BaseAdminPage {
 		group.add(new Radio("done", new Model<String>("Done")));
 	}
 
-	private void assgnTicket() {
-
+	private void assignTicket() {
+		ticket.setAdmin(benutzer);
+		ticketService.update(ticket);
+	}
+	private void saveServiceUnit() {
+		ServiceUnit serviceUnit = new ServiceUnit();
+		serviceUnit.setText(details);
+		serviceUnit.setTicket(ticket);
+		serviceUnitService.insert(serviceUnit);
+		ticket.setStatus(selected.getObject());
+		ticketService.update(ticket);
 	}
 }

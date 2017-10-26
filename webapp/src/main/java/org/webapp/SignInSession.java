@@ -22,13 +22,15 @@ public class SignInSession extends AuthenticatedWebSession {
 
 	@Override
 	public final boolean authenticate(final String email, final String password) {
-
+		if (benutzerService.findByEmail(email) != null) {
 			Benutzer benutzer = benutzerService.findByEmail(email);
 			if (benutzer.getEmail().equalsIgnoreCase(email) && benutzer.getPassword().equalsIgnoreCase(password)) {
 				return true;
 			}
+		}
 		return false;
 	}
+
 	@Override
 	public Roles getRoles() {
 		if (isSignedIn()) {

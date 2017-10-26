@@ -30,11 +30,12 @@
 				<label for="login">Set Ticket status:</label>
 			 <wicket:container wicket:id="group">
   					  <label class="p-1"><input wicket:id="open" type="radio" name="statusSU"/>&nbsp;Open</label>
-  					  <label class="p-1"><input wicket:id="inProgress" type="radio" name="statusSU"/>&nbsp;In progress</label>
+  					  <label class="p-1"><input wicket:id="inProgress" type="radio" checked="checked" name="statusSU"/>&nbsp;In progress</label>
    					<label class="p-1"><input wicket:id="done" type="radio" name="statusSU"/>&nbsp;Done</label>
  				 </wicket:container>
  				 <br />
  				 <input type="submit" class="btn btn-primary mt-2" value="Save Service Unit" wicket:id="saveButton" />
+ 				 <input type="submit" class="btn btn-primary mt-2" value="Back" wicket:id="cancelButton"/>
 			</form>
 		</div>
 		<br />
