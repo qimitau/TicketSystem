@@ -1,5 +1,6 @@
 package org.webapp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,8 +28,13 @@ public class UebersichtPage extends BaseAdminPage {
 	public UebersichtPage(Benutzer benutzer) {
 		super();
 		this.benutzer = benutzer;
-
-		List<Ticket> tickets = ticketService.findAll();
+		List<Ticket> tickets = new ArrayList<>();
+		List<Ticket> ticketsTemp = ticketService.findAll();
+		for (Ticket ticket : ticketsTemp) {
+			if (!ticket.getStatus().equalsIgnoreCase("done")) {
+				tickets.add(ticket);
+			}
+		}
 
 		@SuppressWarnings("unchecked")
 		DataView ticketsList = new DataView("ticketsList", new ListDataProvider(tickets)) {
