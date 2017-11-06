@@ -51,6 +51,7 @@ public class NewTicketPage extends BaseAdminPage {
 			}
 		};
 		newTicketForm.add(cancelButton);
+		
 	}
 
 	public NewTicketPage(Benutzer benutzer) {

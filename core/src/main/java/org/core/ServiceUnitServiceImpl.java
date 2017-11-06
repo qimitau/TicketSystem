@@ -3,6 +3,7 @@ package org.core;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.persistence.NoResultException;
 
 import org.jpa.domain.ServiceUnit;
 
@@ -34,23 +35,22 @@ public class ServiceUnitServiceImpl extends AbstractBaseService<ServiceUnit> imp
 	}
 
 	public ServiceUnit findById(Long id) {
-		ServiceUnit serviceUnit = em.find(ServiceUnit.class, id);
-		return serviceUnit;
-	}
-
-	// @SuppressWarnings("unchecked")
-	public List<ServiceUnit> findAll() {
-		List<ServiceUnit> list;
 		try {
-
-			list = em.createQuery("SELECT a FROM ServiceUnit a", ServiceUnit.class).getResultList();
-
-		} finally {
-			// em.close();
+			return em.find(ServiceUnit.class, id);
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			return null;
 		}
-
-		return list;
-
 	}
 
+	public List<ServiceUnit> findAll() {
+		List<ServiceUnit> list = null;
+		try {
+			list = em.createQuery("SELECT a FROM ServiceUnit a", ServiceUnit.class).getResultList();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

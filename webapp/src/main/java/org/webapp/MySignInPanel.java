@@ -203,6 +203,10 @@ public class MySignInPanel extends Panel {
 				setResponsePage(new NewTicketPage(benutzerService.findByEmail(username)));
 			}
 		}
+		else {
+			continueToOriginalDestination();
+			
+		}
 	}
 
 	/**

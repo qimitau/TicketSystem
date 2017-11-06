@@ -42,9 +42,15 @@ public class NewServiceUnitPage extends BaseAdminPage {
 		this.benutzer = benutzer;
 		List<ServiceUnit> serviceUnits = new ArrayList<>();
 		List<ServiceUnit> temp = serviceUnitService.findAll();
-		for (ServiceUnit serviceUnit : temp) {
-			if (serviceUnit.getTicket().getId() == ticket.getId()) {
-				serviceUnits.add(serviceUnit);
+		if (temp != null) {
+			try {
+				for (ServiceUnit serviceUnit : temp) {
+					if (serviceUnit.getTicket().getId() == ticket.getId()) {
+						serviceUnits.add(serviceUnit);
+					}
+				}
+			} catch (NullPointerException e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -54,7 +60,8 @@ public class NewServiceUnitPage extends BaseAdminPage {
 			protected void populateItem(Item item) {
 				item.add(new Label("serviceUnitId", ((ServiceUnit) item.getModelObject()).getId()));
 				item.add(new Label("serviceUnitText", ((ServiceUnit) item.getModelObject()).getText()));
-//				item.add(new Label("ServiceUnitTime", ((ServiceUnit) item.getModelObject()).getTimestampField().toString()));
+				// item.add(new Label("ServiceUnitTime", ((ServiceUnit)
+				// item.getModelObject()).getTimestampField().toString()));
 			}
 		};
 		add(serviceUnitList);
@@ -82,7 +89,7 @@ public class NewServiceUnitPage extends BaseAdminPage {
 			}
 		};
 		newSUForm.add(saveButton);
-		
+
 		Button cancelButton = new Button("cancelButton") {
 			@Override
 			public void onSubmit() {
@@ -103,6 +110,7 @@ public class NewServiceUnitPage extends BaseAdminPage {
 		ticket.setAdmin(benutzer);
 		ticketService.update(ticket);
 	}
+
 	private void saveServiceUnit() {
 		ServiceUnit serviceUnit = new ServiceUnit();
 		serviceUnit.setText(details);

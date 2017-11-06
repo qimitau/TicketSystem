@@ -32,9 +32,15 @@ public class UebersichtPage extends BaseAdminPage {
 		this.benutzer = benutzer;
 		List<Ticket> tickets = new ArrayList<>();
 		List<Ticket> ticketsTemp = ticketService.findAll();
-		for (Ticket ticket : ticketsTemp) {
-			if (!ticket.getStatus().equalsIgnoreCase("done")) {
-				tickets.add(ticket);
+		if (ticketsTemp != null) {
+			try {
+				for (Ticket ticket : ticketsTemp) {
+					if (!ticket.getStatus().equalsIgnoreCase("done")) {
+						tickets.add(ticket);
+					}
+				}
+			} catch (NullPointerException e) {
+				e.printStackTrace();
 			}
 		}
 

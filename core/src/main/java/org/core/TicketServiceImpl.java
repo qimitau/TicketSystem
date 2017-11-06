@@ -3,6 +3,7 @@ package org.core;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
@@ -33,24 +34,27 @@ public class TicketServiceImpl extends AbstractBaseService<Ticket> implements Ti
 		super.update(ticket);
 
 	}
+
 	public Ticket findById(Long id) {
-		Ticket ticket = em.find(Ticket.class, id);
-		return ticket;
+		try {
+			return em.find(Ticket.class, id);
+
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
-	// @SuppressWarnings("unchecked")
 	public List<Ticket> findAll() {
-		List<Ticket> list;
+		List<Ticket> list = null;
 		try {
 
 			list = em.createQuery("SELECT a FROM Ticket a", Ticket.class).getResultList();
-	
-		} finally {
-		//	em.close();
+			return list;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return list;
 		}
-
-		return list;
-
 	}
-
 }
