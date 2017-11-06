@@ -6,6 +6,5 @@ public class LoginPage extends BasePage {
 
 	public LoginPage() {
 		add(new MySignInPanel("signInPanel", false));
-		
 	}
 }

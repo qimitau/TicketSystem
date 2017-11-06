@@ -12,29 +12,27 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Benutzer implements Serializable {
-	 
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	private String name; 
-	
+
+	private String name;
+
 	private String department;
-	
+
 	private String password;
-	
+
 	@Column(unique = true)
 	private String email;
-	
-	
-	@OneToMany(mappedBy = "benutzer")
-	  private List<Ticket> tickets  = new ArrayList<Ticket>();
-	
-	@OneToMany(mappedBy = "admin")
-	  private List<Ticket> ticketsAdmin  = new ArrayList<Ticket>();
 
+	@OneToMany(mappedBy = "benutzer")
+	private List<Ticket> tickets = new ArrayList<Ticket>();
+
+	@OneToMany(mappedBy = "admin")
+	private List<Ticket> ticketsAdmin = new ArrayList<Ticket>();
 
 	public String getName() {
 		return name;
@@ -90,6 +88,6 @@ public class Benutzer implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}	
+	}
 
-} 
+}

@@ -4,7 +4,6 @@ import javax.inject.Inject;
 
 import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.authentication.IAuthenticationStrategy;
-import org.apache.wicket.authentication.strategy.DefaultAuthenticationStrategy;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.CheckBox;
@@ -14,8 +13,8 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.protocol.http.WebSession;
 import org.core.BenutzerService;
-import org.jpa.domain.Benutzer;
 
 public class MySignInPanel extends Panel {
 	private static final long serialVersionUID = 1L;
@@ -173,7 +172,10 @@ public class MySignInPanel extends Panel {
 	 * @return true, if signed in
 	 */
 	private boolean isSignedIn() {
-		return AuthenticatedWebSession.get().isSignedIn();
+		if (WebSession.get() instanceof AuthenticatedWebSession)
+			return AuthenticatedWebSession.get().isSignedIn();
+		else
+			return false;
 	}
 
 	/**
@@ -202,10 +204,9 @@ public class MySignInPanel extends Panel {
 			} else {
 				setResponsePage(new NewTicketPage());
 			}
-		}
-		else {
+		} else {
 			continueToOriginalDestination();
-			
+
 		}
 	}
 
