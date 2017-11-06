@@ -7,11 +7,9 @@ import org.jpa.domain.Benutzer;
 
 public class ErrorPage extends BaseAdminPage {
 	private static final long serialVersionUID = 1L;
-	private Benutzer benutzer;
 
-	public ErrorPage(Benutzer benutzer) {
+	public ErrorPage() {
 		super();
-		this.benutzer = benutzer;
 		add(new Label("error", "Ikr!"));
 
 		add(new Label("more", "Something going wrong here!"));
@@ -30,7 +28,7 @@ public class ErrorPage extends BaseAdminPage {
 	}
 
 	private void addNewTicket() {
-		setResponsePage(new NewTicketPage(benutzer));
+		setResponsePage(new NewTicketPage());
 	}
 
 }

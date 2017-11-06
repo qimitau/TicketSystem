@@ -8,7 +8,7 @@ import org.jpa.domain.Benutzer;
 public class SuccessPage extends BaseAdminPage {
 	
 
-	public SuccessPage(Benutzer benutzer) {
+	public SuccessPage() {
 		super();
 		add(new Label("success", "Success!"));
 		
@@ -21,7 +21,7 @@ public class SuccessPage extends BaseAdminPage {
 
 			@Override
 			public void onSubmit() {
-				setResponsePage(new NewTicketPage(benutzer));
+				setResponsePage(new NewTicketPage());
 			}
 
 		};

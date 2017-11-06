@@ -25,11 +25,11 @@ public class UebersichtPage extends BaseAdminPage {
 	@Inject
 	TicketService ticketService;
 	private Ticket selected;
-	private Benutzer benutzer;
+//	private Benutzer benutzer;
 
-	public UebersichtPage(Benutzer benutzer) {
+	public UebersichtPage() {
 		super();
-		this.benutzer = benutzer;
+//		this.benutzer = benutzer;
 		List<Ticket> tickets = new ArrayList<>();
 		List<Ticket> ticketsTemp = ticketService.findAll();
 		if (ticketsTemp != null) {
@@ -67,11 +67,12 @@ public class UebersichtPage extends BaseAdminPage {
 
 			@Override
 			public void onSubmit() {
-				setResponsePage(new UebersichtPage(benutzer));
+				setResponsePage(new UebersichtPage());
 			}
 		};
 		refreshForm.add(refreshButton);
-
+		
+		
 	}
 
 	class ActionPanel extends Panel {
@@ -82,7 +83,7 @@ public class UebersichtPage extends BaseAdminPage {
 				@Override
 				public void onClick() {
 					selected = (Ticket) getParent().getDefaultModelObject();
-					setResponsePage(new NewServiceUnitPage(selected, benutzer));
+					setResponsePage(new NewServiceUnitPage(selected));
 				}
 			});
 		}

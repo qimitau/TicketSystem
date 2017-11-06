@@ -28,7 +28,7 @@ public class NewServiceUnitPage extends BaseAdminPage {
 	private static final long serialVersionUID = 1L;
 	private String details;
 	private Ticket ticket;
-	private Benutzer benutzer;
+//	private Benutzer benutzer;
 	IModel<String> selected;
 
 	@Inject
@@ -36,10 +36,9 @@ public class NewServiceUnitPage extends BaseAdminPage {
 	@Inject
 	TicketService ticketService;
 
-	public NewServiceUnitPage(Ticket ticket, Benutzer benutzer) {
+	public NewServiceUnitPage(Ticket ticket) {
 		super();
 		this.ticket = ticket;
-		this.benutzer = benutzer;
 		List<ServiceUnit> serviceUnits = new ArrayList<>();
 		List<ServiceUnit> temp = serviceUnitService.findAll();
 		if (temp != null) {
@@ -93,7 +92,7 @@ public class NewServiceUnitPage extends BaseAdminPage {
 		Button cancelButton = new Button("cancelButton") {
 			@Override
 			public void onSubmit() {
-				setResponsePage(new UebersichtPage(benutzer));
+				setResponsePage(new UebersichtPage());
 			}
 		};
 		newSUForm.add(cancelButton);
@@ -107,7 +106,7 @@ public class NewServiceUnitPage extends BaseAdminPage {
 	}
 
 	private void assignTicket() {
-		ticket.setAdmin(benutzer);
+		ticket.setAdmin(SignInSession.get().getBenutzer());
 		ticketService.update(ticket);
 	}
 
@@ -118,6 +117,6 @@ public class NewServiceUnitPage extends BaseAdminPage {
 		serviceUnitService.insert(serviceUnit);
 		ticket.setStatus(selected.getObject());
 		ticketService.update(ticket);
-		setResponsePage(new NewServiceUnitPage(ticket, benutzer));
+		setResponsePage(new NewServiceUnitPage(ticket));
 	}
 }
