@@ -5,35 +5,27 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Button;
-import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
-import org.apache.wicket.model.IModel;
 import org.core.TicketService;
-import org.jpa.domain.Benutzer;
 import org.jpa.domain.Ticket;
 
-public class UebersichtPage extends BaseAdminPage {
-
+public class StatisticPage extends BaseAdminPage {
 	private static final long serialVersionUID = 1L;
 	@Inject
 	TicketService ticketService;
 	private Ticket selected;
 
-	public UebersichtPage() {
+	public StatisticPage() {
 		super();
 		List<Ticket> tickets = new ArrayList<>();
 		List<Ticket> ticketsTemp = ticketService.findAll();
 		if (ticketsTemp != null) {
 			try {
 				for (Ticket ticket : ticketsTemp) {
-					if (!ticket.getStatus().equalsIgnoreCase("done")) {
+					if (ticket.getStatus().equalsIgnoreCase("done")) {
 						tickets.add(ticket);
 					}
 				}
@@ -53,45 +45,8 @@ public class UebersichtPage extends BaseAdminPage {
 				item.add(new Label("ticketTime", ((Ticket) item.getModelObject()).getTimestampField().toString().substring(0, 19)));
 				item.add(new Label("ticketAdmin", ((Ticket) item.getModelObject()).getAdmin().getName()));
 				item.add(new Label("ticketUser", ((Ticket) item.getModelObject()).getBenutzer().getName()));
-				item.add(new ActionPanel("selectedLabel", item.getModel()));
-
 			}
 		};
 		add(ticketsList);
-
-		Form<Void> refreshForm = new Form<Void>("refreshForm");
-		add(refreshForm);
-		Button refreshButton = new Button("refreshButton") {
-
-			@Override
-			public void onSubmit() {
-				setResponsePage(new UebersichtPage());
-			}
-		};
-		refreshForm.add(refreshButton);
-
-	}
-
-	class ActionPanel extends Panel {
-
-		public ActionPanel(String id, IModel<Ticket> model) {
-			super(id, model);
-			add(new Link<Void>("select") {
-				@Override
-				public void onClick() {
-					selected = (Ticket) getParent().getDefaultModelObject();
-					setResponsePage(new NewServiceUnitPage(selected));
-				}
-			});
-		}
-	}
-
-	public Ticket getSelected() {
-		return selected;
-	}
-
-	public void setSelected(Ticket selected) {
-		addStateChange();
-		this.selected = selected;
 	}
 }

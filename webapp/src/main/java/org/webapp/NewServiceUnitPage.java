@@ -1,5 +1,6 @@
 package org.webapp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class NewServiceUnitPage extends BaseAdminPage {
 	ServiceUnitService serviceUnitService;
 	@Inject
 	TicketService ticketService;
+	//SimpleDateFormat noMilliSecondsFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	public NewServiceUnitPage(Ticket ticket) {
 		super();
@@ -58,7 +60,7 @@ public class NewServiceUnitPage extends BaseAdminPage {
 			protected void populateItem(Item item) {
 				item.add(new Label("serviceUnitId", ((ServiceUnit) item.getModelObject()).getId()));
 				item.add(new Label("serviceUnitText", ((ServiceUnit) item.getModelObject()).getText()));
-				item.add(new Label("ServiceUnitTime", ((ServiceUnit) item.getModelObject()).getTimestampField().toString()));
+				item.add(new Label("ServiceUnitTime", ((ServiceUnit) item.getModelObject()).getTimestampField().toString().substring(0, 19)));
 			}
 		};
 		add(serviceUnitList);
