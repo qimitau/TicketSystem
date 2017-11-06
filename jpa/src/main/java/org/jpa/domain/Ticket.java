@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 public class Ticket implements Serializable {
 	
@@ -22,6 +24,7 @@ public class Ticket implements Serializable {
 	private Long id;
 	
 	@Column(name = "TIMESTAMP_FIELD", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@CreationTimestamp
 	private java.sql.Timestamp timestampField;
 	
 	private String status;

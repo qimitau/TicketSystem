@@ -22,10 +22,8 @@ public class NewTicketPage extends BaseAdminPage {
 	BenutzerService benutzerService;
 	private String subject;
 	private String details;
-//	private Benutzer benutzer;
 
 	public NewTicketPage() {
-//		this.benutzer = benutzerService.findById(1L);
 
 		Form<Void> newTicketForm = new Form<Void>("newTicketForm");
 		add(newTicketForm);
@@ -55,35 +53,6 @@ public class NewTicketPage extends BaseAdminPage {
 		//debug
 		//System.err.println(SignInSession.get().getBenutzer().getName());		
 	}
-
-//	public NewTicketPage(Benutzer benutzer) {
-//		this.benutzer = benutzer;
-//
-//		Form<Void> newTicketForm = new Form<Void>("newTicketForm");
-//		add(newTicketForm);
-//		newTicketForm.add(new Label("newTicket", "Create new Ticket:"));
-//
-//		TextField<String> subjectField = new TextField<String>("subject", new PropertyModel<String>(this, "subject"));
-//		newTicketForm.add(subjectField);
-//		TextArea<String> detailsField = new TextArea<String>("details", new PropertyModel<String>(this, "details"));
-//		newTicketForm.add(detailsField);
-//
-//		Button sendButton = new Button("sendButton") {
-//			@Override
-//			public void onSubmit() {
-//				addNewTicket(benutzer, subject, details);
-//			}
-//		};
-//		newTicketForm.add(sendButton);
-//
-//		Button cancelButton = new Button("cancelButton") {
-//			@Override
-//			public void onSubmit() {
-//				cancelButtonRedirect(benutzer);
-//			}
-//		};
-//		newTicketForm.add(cancelButton);
-//	}
 
 	private void addNewTicket(String subject, String details) {
 		if (subject != null && details != null) {

@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 public class ServiceUnit implements Serializable {
 
@@ -19,6 +21,7 @@ public class ServiceUnit implements Serializable {
 	private Long id;
 	
 	@Column(name = "TIMESTAMP_FIELD", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@CreationTimestamp
 	private java.sql.Timestamp timestampField;
 	
 	@Column(length = 1024)

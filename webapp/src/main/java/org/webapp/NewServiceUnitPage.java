@@ -28,7 +28,6 @@ public class NewServiceUnitPage extends BaseAdminPage {
 	private static final long serialVersionUID = 1L;
 	private String details;
 	private Ticket ticket;
-//	private Benutzer benutzer;
 	IModel<String> selected;
 
 	@Inject
@@ -59,8 +58,7 @@ public class NewServiceUnitPage extends BaseAdminPage {
 			protected void populateItem(Item item) {
 				item.add(new Label("serviceUnitId", ((ServiceUnit) item.getModelObject()).getId()));
 				item.add(new Label("serviceUnitText", ((ServiceUnit) item.getModelObject()).getText()));
-				// item.add(new Label("ServiceUnitTime", ((ServiceUnit)
-				// item.getModelObject()).getTimestampField().toString()));
+				item.add(new Label("ServiceUnitTime", ((ServiceUnit) item.getModelObject()).getTimestampField().toString()));
 			}
 		};
 		add(serviceUnitList);

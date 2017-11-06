@@ -25,11 +25,9 @@ public class UebersichtPage extends BaseAdminPage {
 	@Inject
 	TicketService ticketService;
 	private Ticket selected;
-//	private Benutzer benutzer;
 
 	public UebersichtPage() {
 		super();
-//		this.benutzer = benutzer;
 		List<Ticket> tickets = new ArrayList<>();
 		List<Ticket> ticketsTemp = ticketService.findAll();
 		if (ticketsTemp != null) {
