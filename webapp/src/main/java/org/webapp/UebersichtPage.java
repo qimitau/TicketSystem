@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
@@ -16,7 +15,6 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
 import org.apache.wicket.model.IModel;
 import org.core.TicketService;
-import org.jpa.domain.Benutzer;
 import org.jpa.domain.Ticket;
 
 public class UebersichtPage extends BaseAdminPage {
@@ -30,6 +28,8 @@ public class UebersichtPage extends BaseAdminPage {
 		super();
 		List<Ticket> tickets = new ArrayList<>();
 		List<Ticket> ticketsTemp = ticketService.findAll();
+		// for debug
+		// List<Ticket> ticketsTemp = new ArrayList<>();
 		if (ticketsTemp != null) {
 			try {
 				for (Ticket ticket : ticketsTemp) {
@@ -50,7 +50,8 @@ public class UebersichtPage extends BaseAdminPage {
 				item.add(new Label("ticketStatus", ((Ticket) item.getModelObject()).getStatus()));
 				item.add(new Label("ticketSubject", ((Ticket) item.getModelObject()).getSubject()));
 				item.add(new Label("ticketText", ((Ticket) item.getModelObject()).getText()));
-				item.add(new Label("ticketTime", ((Ticket) item.getModelObject()).getTimestampField().toString().substring(0, 19)));
+				item.add(new Label("ticketTime",
+						((Ticket) item.getModelObject()).getTimestampField().toString().substring(0, 19)));
 				item.add(new Label("ticketAdmin", ((Ticket) item.getModelObject()).getAdmin().getName()));
 				item.add(new Label("ticketUser", ((Ticket) item.getModelObject()).getBenutzer().getName()));
 				item.add(new ActionPanel("selectedLabel", item.getModel()));
