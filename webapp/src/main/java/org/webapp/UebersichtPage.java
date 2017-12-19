@@ -21,11 +21,39 @@ public class UebersichtPage extends BaseAdminPage {
 
 	private static final long serialVersionUID = 1L;
 	@Inject
-	TicketService ticketService;
+	private TicketService ticketService;
 	private Ticket selected;
 
 	public UebersichtPage() {
 		super();
+	}
+
+	class ActionPanel extends Panel {
+
+		public ActionPanel(String id, IModel<Ticket> model) {
+			super(id, model);
+			add(new Link<Void>("select") {
+				@Override
+				public void onClick() {
+					selected = (Ticket) getParent().getDefaultModelObject();
+					setResponsePage(new NewServiceUnitPage(selected));
+				}
+			});
+		}
+	}
+
+	public Ticket getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Ticket selected) {
+		addStateChange();
+		this.selected = selected;
+	}
+
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
 		List<Ticket> tickets = new ArrayList<>();
 		List<Ticket> ticketsTemp = ticketService.findAll();
 		// for debug
@@ -70,29 +98,5 @@ public class UebersichtPage extends BaseAdminPage {
 			}
 		};
 		refreshForm.add(refreshButton);
-
-	}
-
-	class ActionPanel extends Panel {
-
-		public ActionPanel(String id, IModel<Ticket> model) {
-			super(id, model);
-			add(new Link<Void>("select") {
-				@Override
-				public void onClick() {
-					selected = (Ticket) getParent().getDefaultModelObject();
-					setResponsePage(new NewServiceUnitPage(selected));
-				}
-			});
-		}
-	}
-
-	public Ticket getSelected() {
-		return selected;
-	}
-
-	public void setSelected(Ticket selected) {
-		addStateChange();
-		this.selected = selected;
 	}
 }
